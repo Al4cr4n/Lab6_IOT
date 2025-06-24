@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/item_ingreso.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:padding="8dp"
@@ -22,7 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <!-- Nuevo TextView para descripción -->
         <TextView
             android:id="@+id/tvDescripcion"
             android:layout_width="wrap_content"
@@ -36,11 +35,20 @@
         android:id="@+id/tvMonto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="16dp"/>
+        android:paddingEnd="8dp"/>
 
     <ImageButton
         android:id="@+id/btnDelete"
         android:src="@android:drawable/ic_menu_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <!-- NUEVO: Botón para descargar imagen -->
+    <ImageButton
+        android:id="@+id/btnDownload"
+        android:src="@android:drawable/ic_menu_save"
+        android:contentDescription="@string/desc_download_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"/>
 </LinearLayout>

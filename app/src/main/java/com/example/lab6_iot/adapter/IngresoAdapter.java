@@ -20,6 +20,7 @@ public class IngresoAdapter extends RecyclerView.Adapter<IngresoAdapter.VH> {
     public interface Listener {
         void onEdit(Ingreso ingreso);
         void onDelete(Ingreso ingreso);
+        void onDownload(Ingreso ingreso);  // ← nuevo método
     }
 
     private final List<Ingreso> items;
@@ -38,33 +39,34 @@ public class IngresoAdapter extends RecyclerView.Adapter<IngresoAdapter.VH> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VH holder, int position) {
-        Ingreso ingreso = items.get(position);
-
-        holder.tvTitulo.setText(ingreso.getTitulo());
-        holder.tvMonto.setText(String.format("%.2f", ingreso.getMonto()));
-        holder.tvFecha.setText(DateFormat.getDateInstance().format(ingreso.getFecha().toDate()));
-        holder.tvDescripcion.setText(
-                ingreso.getDescripcion() != null ? ingreso.getDescripcion() : ""
+    public void onBindViewHolder(@NonNull VH h, int pos) {
+        Ingreso ing = items.get(pos);
+        h.tvTitulo.setText(ing.getTitulo());
+        h.tvMonto.setText(String.format("%.2f", ing.getMonto()));
+        h.tvFecha.setText(DateFormat.getDateInstance().format(ing.getFecha().toDate()));
+        h.tvDescripcion.setText(
+                ing.getDescripcion() != null ? ing.getDescripcion() : ""
         );
 
-        holder.itemView.setOnClickListener(v -> listener.onEdit(ingreso));
-        holder.btnDelete.setOnClickListener(v -> listener.onDelete(ingreso));
+        h.itemView.setOnClickListener(v -> listener.onEdit(ing));
+        h.btnDelete.setOnClickListener(v -> listener.onDelete(ing));
+        h.btnDownload.setOnClickListener(v -> listener.onDownload(ing));  // ← descarga
     }
 
     @Override public int getItemCount() { return items.size(); }
 
     static class VH extends RecyclerView.ViewHolder {
         TextView tvTitulo, tvMonto, tvFecha, tvDescripcion;
-        ImageButton btnDelete;
+        ImageButton btnDelete, btnDownload;
 
         VH(View itemView) {
             super(itemView);
-            tvTitulo       = itemView.findViewById(R.id.tvTitulo);
-            tvMonto        = itemView.findViewById(R.id.tvMonto);
-            tvFecha        = itemView.findViewById(R.id.tvFecha);
-            tvDescripcion  = itemView.findViewById(R.id.tvDescripcion);
-            btnDelete      = itemView.findViewById(R.id.btnDelete);
+            tvTitulo      = itemView.findViewById(R.id.tvTitulo);
+            tvMonto       = itemView.findViewById(R.id.tvMonto);
+            tvFecha       = itemView.findViewById(R.id.tvFecha);
+            tvDescripcion = itemView.findViewById(R.id.tvDescripcion);
+            btnDelete     = itemView.findViewById(R.id.btnDelete);
+            btnDownload   = itemView.findViewById(R.id.btnDownload);
         }
     }
 }

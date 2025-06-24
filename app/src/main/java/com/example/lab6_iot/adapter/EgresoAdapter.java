@@ -1,3 +1,4 @@
+
 package com.example.lab6_iot.adapter;
 
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ public class EgresoAdapter extends RecyclerView.Adapter<EgresoAdapter.VH> {
     public interface Listener {
         void onEdit(Egreso egreso);
         void onDelete(Egreso egreso);
+        void onDownload(Egreso egreso);   // ← nuevo
     }
 
     private final List<Egreso> items;
@@ -38,33 +40,32 @@ public class EgresoAdapter extends RecyclerView.Adapter<EgresoAdapter.VH> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VH holder, int position) {
-        Egreso egreso = items.get(position);
+    public void onBindViewHolder(@NonNull VH h, int pos) {
+        Egreso eg = items.get(pos);
+        h.tvTitulo.setText(eg.getTitulo());
+        h.tvMonto.setText(String.format("%.2f", eg.getMonto()));
+        h.tvFecha.setText(DateFormat.getDateInstance().format(eg.getFecha().toDate()));
+        h.tvDescripcion.setText(eg.getDescripcion() != null ? eg.getDescripcion() : "");
 
-        holder.tvTitulo.setText(egreso.getTitulo());
-        holder.tvMonto.setText(String.format("%.2f", egreso.getMonto()));
-        holder.tvFecha.setText(DateFormat.getDateInstance().format(egreso.getFecha().toDate()));
-        holder.tvDescripcion.setText(
-                egreso.getDescripcion() != null ? egreso.getDescripcion() : ""
-        );
-
-        holder.itemView.setOnClickListener(v -> listener.onEdit(egreso));
-        holder.btnDelete.setOnClickListener(v -> listener.onDelete(egreso));
+        h.itemView.setOnClickListener(v -> listener.onEdit(eg));
+        h.btnDelete.setOnClickListener(v -> listener.onDelete(eg));
+        h.btnDownload.setOnClickListener(v -> listener.onDownload(eg));  // ← descarga
     }
 
     @Override public int getItemCount() { return items.size(); }
 
     static class VH extends RecyclerView.ViewHolder {
         TextView tvTitulo, tvMonto, tvFecha, tvDescripcion;
-        ImageButton btnDelete;
+        ImageButton btnDelete, btnDownload;
 
         VH(View itemView) {
             super(itemView);
-            tvTitulo       = itemView.findViewById(R.id.tvTitulo);
-            tvMonto        = itemView.findViewById(R.id.tvMonto);
-            tvFecha        = itemView.findViewById(R.id.tvFecha);
-            tvDescripcion  = itemView.findViewById(R.id.tvDescripcion);
-            btnDelete      = itemView.findViewById(R.id.btnDelete);
+            tvTitulo      = itemView.findViewById(R.id.tvTitulo);
+            tvMonto       = itemView.findViewById(R.id.tvMonto);
+            tvFecha       = itemView.findViewById(R.id.tvFecha);
+            tvDescripcion = itemView.findViewById(R.id.tvDescripcion);
+            btnDelete     = itemView.findViewById(R.id.btnDelete);
+            btnDownload   = itemView.findViewById(R.id.btnDownload);
         }
     }
 }

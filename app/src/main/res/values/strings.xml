@@ -10,5 +10,9 @@
     <string name="action_guardar">Guardar</string>
     <string name="facebook_application_id">676492168482308</string>
     <string name="facebook_client_token">4253cf7c5f3411bbbd8b41a8eb555bc9</string>
+    <string name="desc_download_image">Descargar imagen</string>
+    <string name="hint_comprobante">Comprobante (imagen)</string>
+
+
 
 </resources>

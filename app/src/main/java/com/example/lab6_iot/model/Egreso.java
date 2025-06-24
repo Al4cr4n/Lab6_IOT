@@ -8,57 +8,35 @@ public class Egreso {
     private double monto;
     private String descripcion;
     private Timestamp fecha;
+    private String rutaImagen;
 
-    // Constructor vacío para Firestore
     public Egreso() { }
 
-    // Constructor con campos
-    public Egreso(String titulo, double monto, String descripcion, Timestamp fecha) {
-        this.titulo = titulo;
-        this.monto = monto;
-        this.descripcion = descripcion;
-        this.fecha = fecha;
+    public Egreso(String titulo, double monto, String descripcion, Timestamp fecha, String rutaImagen) {
+        this.titulo     = titulo;
+        this.monto      = monto;
+        this.descripcion= descripcion;
+        this.fecha      = fecha;
+        this.rutaImagen = rutaImagen;
     }
 
-    // Getter y setter para el ID (subcolección)
-    public String getId() {
-        return id;
-    }
+    // getters & setters existentes...
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public String getTitulo() { return titulo; }
+    public void setTitulo(String titulo) { this.titulo = titulo; }
 
-    // Aquí están los getters que faltan:
-    public String getTitulo() {
-        return titulo;
-    }
+    public double getMonto() { return monto; }
+    public void setMonto(double monto) { this.monto = monto; }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    public double getMonto() {
-        return monto;
-    }
+    public Timestamp getFecha() { return fecha; }
+    public void setFecha(Timestamp fecha) { this.fecha = fecha; }
 
-    public void setMonto(double monto) {
-        this.monto = monto;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Timestamp getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Timestamp fecha) {
-        this.fecha = fecha;
-    }
+    // ← nuevo
+    public String getRutaImagen() { return rutaImagen; }
+    public void setRutaImagen(String rutaImagen) { this.rutaImagen = rutaImagen; }
 }
